@@ -28,4 +28,78 @@ Load the carInsurance data set about the insurance risk rating of cars based on 
 ```{r}
 load("C:/Users/Paola/Documents/GitHub/hands-on-2023A/data/02_dataquality/carInsurance.Rdata")
 
+# Convert the loaded object to a data frame (if necessary)
+# Replace `object_name` with the name of the object you loaded from the .Rdata file
+data_df <- as.data.frame(carIns)
+
+# Write the data frame to a CSV file
+write.csv(data_df, "carInsurance.csv", row.names = FALSE)
 ```
+
+```{r}
+#Check the new file .csv
+data_df
+```
+
+### 
+(a) Check if there are any missing values.
+Tip: use the function any_na().
+
+```{r}
+# Check for missing values
+if (any_na(data_df)) {
+  print("There are missing values in the dataset.")
+} else {
+  print("There are no missing values in the dataset.")
+}
+```
+
+### 
+(b) Count the number of cases that have, at least, one missing value.
+Tip: use the function filter_any_na() and then count().
+
+```{r}
+# Filter cases with at least one missing value and count them
+missing_cases <- data_df %>% filter_any_na() %>% count()
+
+# Print the number of cases with missing values
+print(missing_cases)
+```
+
+### 
+(c) Create a new data set by removing all the cases that have missing values.
+Tip: use the function drop_rows_any_na()
+
+### 
+(d) Create a new data set by imputing all the missing values with 0.
+Tip: explore the variants of the function impute()
+
+### 
+(e) Create a new data set by imputing the mean in all the columns which have double type values.
+
+### 
+(f) Create a new data set by imputing the mode in all the columns which have integer type values.
+
+### 
+(g) Create a new data set by imputing the most frequent value to the column \"nDoors\".
+Tip: use the function impute_replace()
+
+### 
+(h) Combine the three last imputations to obtain a final dataset. Are there any duplicated cases?
+Tip: use the functions distinct() and count()
+
+## 
+2. Data Pre-Processing
+
+### 
+2. Load the package dlookr. Use the same car insurance data set above and apply the following
+transformations to the price attribute. Be critical regarding the obtained results.
+(a) Apply range-based normalization and z-score normalization.
+Tip: use the function transform().
+(b) Discretize it into 4 equal-frequency ranges an into 4 equal-width ranges.
+Tip: use the function binning().
+3. With the seed 111019 obtain the following samples on the car insurance data set.
+Tip: use the function sample_frac().
+(a) A random sample of 60% of the cases, with replacement
+(b) A stratified sample of 60% of the cases of cars, according to the fuelType attribute.
+(c) Use the table() function to inspect the distribution of values in each of the two samples above.
