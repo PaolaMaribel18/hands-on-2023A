@@ -70,9 +70,22 @@ print(missing_cases)
 (c) Create a new data set by removing all the cases that have missing values.
 Tip: use the function drop_rows_any_na()
 
+```{r}
+# Create a new dataset without missing values
+new_dataset <- drop_rows_any_na(data_df)
+new_dataset
+```
+
 ### 
 (d) Create a new data set by imputing all the missing values with 0.
 Tip: explore the variants of the function impute()
+
+```{r}
+
+# Create a new dataset with missing values imputed as 0
+new_dataset <- impute(data_df, method = "fixed", fixed_value = 0)
+new_dataset
+```
 
 ### 
 (e) Create a new data set by imputing the mean in all the columns which have double type values.
